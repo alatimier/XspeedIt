@@ -14,13 +14,15 @@ class Robot {
 	}
 
 	static computeResult(boxes) {
-		return boxes.join("/");
+		return boxes
+			.map(box => box.articles.join(""))
+			.join("/");
 	}
 
 	packageArticles(articles) {
 		return _.flow(
 			Robot.parseArticles,
-			this.packager.package,
+			this.packager.pact,
 			Robot.computeResult
 		)(articles);
 	}

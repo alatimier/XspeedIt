@@ -1,3 +1,4 @@
+const {Box} = require("../main/model/box");
 const {describe} = require("mocha");
 const {expect} = require("chai");
 const {stub} = require("sinon");
@@ -41,7 +42,7 @@ describe('Robot', function () {
 			const robot = new Robot(noOpPackager);
 			const articles = "123";
 
-			stub(noOpPackager, "package").returns(["91", "72", "61"]);
+			stub(noOpPackager, "package").returns([new Box([9, 1]), new Box([7, 2]), new Box([6, 1])]);
 
 			// When
 			const res = robot.packageArticles(articles);
