@@ -19,7 +19,7 @@ class Robot {
 			.join("/");
 	}
 
-	packageArticles(articles) {
+	pact(articles) {
 		return _.flow(
 			Robot.parseArticles,
 			this.packager.pact,

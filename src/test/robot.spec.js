@@ -10,7 +10,7 @@ describe('Robot', function () {
 
 	beforeEach(function () {
 		noOpPackager = {
-			package() {
+			pact() {
 				return [];
 			}
 		};
@@ -23,7 +23,7 @@ describe('Robot', function () {
 			const articles = "abc";
 
 			// Then
-			expect(() => robot.packageArticles(articles)).to.throw("Invalid articles");
+			expect(() => robot.pact(articles)).to.throw("Invalid articles");
 		});
 
 		it('should not throw exception if articles is numeric', function () {
@@ -32,7 +32,7 @@ describe('Robot', function () {
 			const articles = "123";
 
 			// Then
-			expect(() => robot.packageArticles(articles)).to.not.throw();
+			expect(() => robot.pact(articles)).to.not.throw();
 		});
 	});
 
@@ -42,10 +42,10 @@ describe('Robot', function () {
 			const robot = new Robot(noOpPackager);
 			const articles = "123";
 
-			stub(noOpPackager, "package").returns([new Box([9, 1]), new Box([7, 2]), new Box([6, 1])]);
+			stub(noOpPackager, "pact").returns([new Box([9, 1]), new Box([7, 2]), new Box([6, 1])]);
 
 			// When
-			const res = robot.packageArticles(articles);
+			const res = robot.pact(articles);
 
 			// Then
 			expect(res).to.equal("91/72/61");
@@ -57,7 +57,7 @@ describe('Robot', function () {
 			const articles = "";
 
 			// When
-			const res = robot.packageArticles(articles);
+			const res = robot.pact(articles);
 
 			// Then
 			expect(res).to.equal("");
