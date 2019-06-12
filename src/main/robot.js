@@ -1,5 +1,12 @@
-function pactArticles(articles) {
-    return "";
+function parseArticles(articles) {
+  if (isNaN(articles)) {
+    throw new Error("Invalid articles");
+  }
+  return articles.split().map(Number);
 }
 
-module.exports = {pactArticles};
+function pactArticles(articlesStr) {
+  const articles = parseArticles(articlesStr);
+}
+
+module.exports = { pactArticles };
