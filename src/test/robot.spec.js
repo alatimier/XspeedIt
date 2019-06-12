@@ -1,24 +1,66 @@
 const {describe} = require("mocha");
 const {expect} = require("chai");
-
-const robot = require('../main/robot');
+const {stub} = require("sinon");
+const {Robot} = require("../main/robot");
 
 describe('Robot', function () {
 
-	it('should throw exception if articles is not numeric', function () {
-		// Given
-		const articles = "abc";
+	let noOpPackager;
 
-		// Then
-		expect(() => robot.pactArticles(articles)).to.throw("Invalid articles");
+	beforeEach(function () {
+		noOpPackager = {
+			package() {
+				return [];
+			}
+		};
 	});
 
-	it('should not throw exception if articles is numeric', function () {
-		// Given
-		const articles = "123";
+	describe('Input validation', function () {
+		it('should throw exception if articles is not numeric', function () {
+			// Given
+			const robot = new Robot(noOpPackager);
+			const articles = "abc";
 
-		// Then
-		expect(() => robot.pactArticles(articles)).to.not.throw();
+			// Then
+			expect(() => robot.packageArticles(articles)).to.throw("Invalid articles");
+		});
+
+		it('should not throw exception if articles is numeric', function () {
+			// Given
+			const robot = new Robot(noOpPackager);
+			const articles = "123";
+
+			// Then
+			expect(() => robot.packageArticles(articles)).to.not.throw();
+		});
+	});
+
+	describe('Output format', function () {
+		it('should compute boxes content separated with slashes', function () {
+			// Given
+			const robot = new Robot(noOpPackager);
+			const articles = "123";
+
+			stub(noOpPackager, "package").returns(["91", "72", "61"]);
+
+			// When
+			const res = robot.packageArticles(articles);
+
+			// Then
+			expect(res).to.equal("91/72/61");
+		});
+
+		it('should compute empty string if no article', function () {
+			// Given
+			const robot = new Robot(noOpPackager);
+			const articles = "";
+
+			// When
+			const res = robot.packageArticles(articles);
+
+			// Then
+			expect(res).to.equal("");
+		});
 	});
 
 });
