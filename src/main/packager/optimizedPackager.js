@@ -1,4 +1,4 @@
-const {Box} = require("../model/box");
+import Box from "../model/box";
 
 class OptimizedPackager {
 
@@ -21,4 +21,4 @@ class OptimizedPackager {
 
 }
 
-module.exports = {OptimizedPackager};
+export default OptimizedPackager;

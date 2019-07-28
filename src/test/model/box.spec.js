@@ -1,6 +1,6 @@
-const {describe} = require("mocha");
-const {expect} = require("chai");
-const {Box} = require("../../main/model/box");
+import {describe} from "mocha";
+import {expect} from "chai";
+import Box from "../../main/model/box";
 
 describe('Box', function () {
 

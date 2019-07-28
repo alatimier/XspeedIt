@@ -1,4 +1,4 @@
-const _ = require("lodash");
+import _ from "lodash";
 
 class Robot {
 
@@ -28,4 +28,4 @@ class Robot {
 	}
 }
 
-module.exports = {Robot};
+export default Robot;
